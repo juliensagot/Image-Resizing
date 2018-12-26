@@ -27,6 +27,18 @@ func imageResizeUIKit(imageURL: URL, scalingFactor: Double) -> UIImage? {
     return scaledImage
 }
 
+/// Load and resize and image using the `UIGraphicsImageRenderer` API.
+func imageResizeUIGraphicsImageRenderer(imageURL: URL, scalingFactor: Double) -> UIImage? {
+    let image = UIImage(contentsOfFile: imageURL.path)!
+
+    let size = image.size.applying(CGAffineTransform(scaleX: CGFloat(scalingFactor), y: CGFloat(scalingFactor)))
+    let resizedImage = UIGraphicsImageRenderer(size: size).image { (context) in
+        image.draw(in: context.format.bounds)
+    }
+
+    return resizedImage
+}
+
 /// Load and resize an image using `CGContextDrawImage(...)`.
 func imageResizeCoreGraphics(imageURL: URL, scalingFactor: Double) -> UIImage? {
     let cgImage = UIImage(contentsOfFile: imageURL.path)!.cgImage!

@@ -27,6 +27,7 @@ enum TestImage {
 /// An enumeration of the different kinds of tests.
 enum ResizingTest: String {
     case UIKit = "UIKit"
+    case UIGraphicsImageRenderer = "UIGraphicsImageRenderer"
     case CoreGraphics = "Core Graphics"
     case ImageIO = "Image IO"
     case CoreImageGPU = "Core Image GPU"
@@ -40,6 +41,8 @@ enum ResizingTest: String {
         switch self {
         case .UIKit:
             return imageResizeUIKit
+        case .UIGraphicsImageRenderer:
+            return imageResizeUIGraphicsImageRenderer
         case .CoreGraphics:
             return imageResizeCoreGraphics
         case .ImageIO:
@@ -126,8 +129,8 @@ class ViewController: UIViewController {
     }
     
     func runTests() {
-        let images: [TestImage] = [.Postgres, .NASA]
-        let tests: [ResizingTest] = [.UIKit, .CoreGraphics, .ImageIO, .VImage, .CoreImageGPU, .CoreImageSoftware]
+        let images: [TestImage] = [.Postgres, .NASA,]
+        let tests: [ResizingTest] = [.UIKit, .UIGraphicsImageRenderer, .CoreGraphics, .ImageIO, .VImage, .CoreImageGPU, .CoreImageSoftware]
         
         // build a serial queue for the tests
         let queue = OperationQueue()
